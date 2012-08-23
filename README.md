@@ -25,7 +25,7 @@ The Jeesh gives you the features of these four libraries bundled into a neat pac
 
 ## Starting with the basics, Bonzo stand-alone
 
-Bonzo is a great way to start getting your head around Ender because it's so useful by itself. Lets include it in a page and do some really simple DOM manipulation with it.
+Bonzo is a great way to start getting your head around Ender because it's so useful by itself. Let's include it in a page and do some really simple DOM manipulation with it.
 
 ```html
 <!DOCTYPE HTML>
@@ -61,13 +61,13 @@ Bonzo is a great way to start getting your head around Ender because it's so use
 
 *You can run this as [example1](http://rvagg.github.com/ender-tutorial-guts/example1/example1.html), also available in my GitHub [repository](https://github.com/rvagg/ender-tutorial-guts) for this article.*
 
-This should look relatively familiar to a jQuery user, you can see that Bonzo is providing some of the important utilities you need for modifying the DOM.
+This should look relatively familiar to a jQuery user -- you can see that Bonzo is providing some of the important utilities you need for modifying the DOM.
 
 ## Jumping straight in, Bonzo inside Ender
 
-Lets see what happens when we use a simple Ender build that includes Bonzo. We'll also include Qwery so we can skip the `document.getElementById()` noise and Bean, just to demonstrate how neatly the libraries can mesh together.
+Let's see what happens when we use a simple Ender build that includes Bonzo. We'll also include Qwery so we can skip the `document.getElementById()` noise, and we'll also use Bean to demonstrate how neatly the libraries can mesh together.
 
-We do this on the command line with: `ender build qwery bean bonzo` and end up with a file named *ender.js* that we'll load in our page.
+This is done on the command line with: `ender build qwery bean bonzo`. A file named *ender.js* will be created that can be loaded on a suitable HTML page.
 
 Our script becomes:
 
@@ -88,29 +88,29 @@ $('<pre>')
 
 *You can run this as [example2](http://rvagg.github.com/ender-tutorial-guts/example2/example2.html), also available in my GitHub [repository](https://github.com/rvagg/ender-tutorial-guts) for this article.*
 
-So, we're still using Bonzo to do most of the work here but it's bundled up nicely into our `$` object (also available as `ender`). Some things that we notice:
+Bonzo performs most of the work here but it's bundled up nicely into the `$` object (also available as `ender`). The previous example can be summarised as follows:
 
-* `bonzo.create()` is now working when we pass HTML into `$()`.
-* Qwery is doing the work when we call `$()` with anything else, in this case `$('#scr')` as a selector for our script element.
+* `bonzo.create()` is now working when HTML is passed to `$()`.
+* Qwery does the work when `$()` is called with anything else, in this case `$('#scr')` is used as a selector for the script element.
 * We're using the no-argument variant of `bonzo.text()` to fetch the `innerHTML` of the script element.
-* Bean makes a showing with our `.bind()` call, but the important point is that it's integrated into our call-chain even though it's a separate library. This is where Ender's bundling magic shines.
-* `bonzo.appendTo()` is taking a selector argument which is in turn being passed to Qwery to fetch the selected element from the DOM (`document.body`).
+* Bean makes a showing with the `.bind()` call, but the important point is that it's integrated into our call-chain even though it's a separate library. This is where Ender's bundling magic shines.
+* `bonzo.appendTo()` takes the selector argument which is in turn passed to Qwery to fetch the selected element from the DOM (`document.body`).
 
-Also important here, which we haven't demonstrated is that we can do all of this on multiple elements in the same collection, we could change our first line to `$('<pre></pre><pre></pre>')` and we'd end up with 2 blocks, exactly the same, both responding to the click event.
+Also important here, which we haven't demonstrated, is we can do all of this on multiple elements in the same collection. The first line could be changed to `$('<pre></pre><pre></pre>')` and we'd end up with two blocks, both responding to the click event.
 
 ## Getting educational, pull it apart again!
 
-Back to the original question, lets pull Bonzo out of our Ender build and manually stitch it back together again. Just like we used to do with our toys when we were children! (Or was that just me?)
+It's possible to pull Bonzo out of the Ender build and manually stitch it back together again. Just like we used to do with our toys when we were children! (Or was that just me?)
 
-First, our Ender build is now just created with: `ender build qwery bean` (or we could run `ender remove bonzo` to remove Bonzo from the ender.js created in the above example), so we get the selector engine goodness from Qwery and event management from Bean but not much else.
+First, our Ender build is now created with: `ender build qwery bean` (or we could run `ender remove bonzo` to remove Bonzo from the previous example's `ender.js` file).  The new `ender.js` file will contain the selector engine goodness from Qwery, and event management from Bean, but not much else.
 
-We'll load Bonzo separately, but we also need some special glue. In Ender parlance, this glue is called an Ender **Bridge**.
+Bonzo can be loaded separately, but we'll need some special glue to do this. In Ender parlance, this glue is called an Ender **Bridge**.
 
 ### The Ender Bridge
 
-Ender follows the basic CommonJS Modules pattern, it sets up a simple module registry and it gives each module a `module.exports` object and a `require()` method that you can use in your code to fetch any other modules in the build. It also uses a `provide('name', module.exports)` method to insert your exports into the registry with the name of your module. The exact details here aren't important and I'll cover how you can build your own Ender module in a later article, for now we just need a basic understanding of the module registry system.
+Ender follows the basic CommonJS Module pattern -- it sets up a simple module registry and gives each module a `module.exports` object and a `require()` method that can be used to fetch any other modules in the build. It also uses a `provide('name', module.exports)` method to insert exports into the registry with the name of your module. The exact details here aren't important and I'll cover how you can build your own Ender module in a later article, for now we just need a basic understanding of the module registry system.
 
-Using our Qwery, Bean and Bonzo build, we end up with a file that looks something like this:
+Using our Qwery, Bean and Bonzo build, the file looks something like this:
 
 ```
 |========================================|
@@ -143,13 +143,13 @@ Using our Qwery, Bean and Bonzo build, we end up with a file that looks somethin
 ==========================================
 ```
 
-To be a useful Ender library, the code should be able to adhere to the CommonJS Module pattern if a `module.exports` or `exports` object exists. Many libraries already do this so they can operate both in the browser and in a CommonJS environment such as Node.js. Consider UnderscoreJS for example, it [detects the existence of `exports`](https://github.com/documentcloud/underscore/blob/ca0df9076079a3b2c45475ddb2299fb901a29989/underscore.js#L56-63) and inserts itself onto that object if it exists, otherwise it inserts itself into the global (i.e. `window`) object. This is how Ender compatible libraries that can also be used as stand-alone libraries work too.
+To be a useful Ender library, the code should be able to adhere to the CommonJS Module pattern if a `module.exports` or `exports` object exists. Many libraries already do this so they can operate both in the browser and in a CommonJS environment such as Node. Consider Underscore.js for example, it [detects the existence of `exports`](https://github.com/documentcloud/underscore/blob/ca0df9076079a3b2c45475ddb2299fb901a29989/underscore.js#L56-63) and inserts itself onto that object if it exists, otherwise it inserts itself into the global (i.e. `window`) object. This is how Ender compatible libraries that can also be used as stand-alone libraries work too.
 
-So, skipping over the complexities here, our libraries are registered within Ender and then we encounter the **Bridge**. Technically the bridge is just an arbitrary piece of code that Ender-compatible libraries are allowed to provide the Ender CLI tool; it could be anything. The intention though is to use it as a glue to bind the library into the core `ender` / `$` object. A bridge isn't necessary and can be omitted; in this case everything found on `module.exports` is automatically bound to the `ender` / `$` object. UnderscoreJS doesn't need a bridge because it conforms to the standard CommonJS pattern and its methods are utilities that logically belong on `$`. `$.each(list, callback)` for example. But, if a module needs to operate on `$('selector')` collections then it needs a special binding for its methods. Many modules also require quite complex bindings to make them work nicely inside the Ender environment.
+So, skipping over the complexities here, our libraries are registered within Ender and then we encounter the **Bridge**. Technically the bridge is just an arbitrary piece of code that Ender-compatible libraries are allowed to provide the Ender CLI tool; it could be anything. The intention, though, is to use it as a glue to bind the library into the core `ender` / `$` object. A bridge isn't necessary and can be omitted -- in this case everything found on `module.exports` is automatically bound to the `ender` / `$` object. Underscore.js doesn't need a bridge because it conforms to the standard CommonJS pattern and its methods are utilities that logically belong on `$` -- for example, `$.each(list, callback)`. If a module needs to operate on `$('selector')` collections then it needs a special binding for its methods. Many modules also require quite complex bindings to make them work nicely inside the Ender environment.
 
 Bonzo has one of the most complex bridges that you'll find in the Endersphere, so we won't be looking into it here. If you're interested in digging deeper, a simpler bridge with some interesting features can be found in [Morpheus](https://github.com/ded/morpheus/blob/master/src/ender.js), an animation framework for Ender. Morpheus adds a `$.tween()` method and also an `$('selector').animate()` and some additional helper methods.
 
-The simplest form of Ender bridge is one that lifts the `module.exports` methods to a new *namespace*. Consider [Moment.js](http://momentjs.com/), the popular date & time library. When used in a CommonJS environment it adds all of its methods to `module.exports`. Without a bridge, when added to an Ender build you would end up with `$.utc()`, `$.unix()`, `$.add()`, `$.subtract()` and other methods that don't have very meaningful names outside of Moment.js, they are also likely to conflict with other libraries that you may want to add to your Ender build. The logical solution is to lift them up to `$.moment.utc()` etc., then you also get to use the exported main function as `$.moment(Date|String|Number)`. To achieve this, Moment.js' [bridge](https://github.com/timrwood/moment/blob/master/ender.js) looks like this:
+The simplest form of Ender bridge is one that lifts the `module.exports` methods to a new *namespace*. Consider [Moment.js](http://momentjs.com/), the popular date and time library. When used in a CommonJS environment it adds all of its methods to `module.exports`. Without a bridge, when added to an Ender build you'd end up with `$.utc()`, `$.unix()`, `$.add()`, `$.subtract()` and other methods that don't have very meaningful names outside of Moment.js.  They are also likely to conflict with other libraries that you may want to add to your Ender build. The logical solution is to lift them up to `$.moment.utc()` etc., then you also get to use the exported main function as `$.moment(Date|String|Number)`. To achieve this, Moment.js' [bridge](https://github.com/timrwood/moment/blob/master/ender.js) looks like this:
 
 ```js
 $.ender({ moment: require('moment') })
@@ -159,9 +159,9 @@ The `$.ender()` method is the way that a bridge can add methods to the global `e
 
 ### Bonzo in parts
 
-Returning to what we were originally trying to achieve. We're loading Bonzo as a stand-alone library and we want to integrate it into an Ender build in the browser. There are two important things we need to do to achieve this: (1) load Bonzo's bridge so it can wire Bonzo into Ender, and (2) make Ender aware of Bonzo so a `require('bonzo')` will do the right thing because this is how the bridge fetches Bonzo.
+Back to what we were originally trying to achieve: we're loading Bonzo as a stand-alone library and we want to integrate it into an Ender build in the browser. There are two important things we need to do to achieve this: (1) load Bonzo's bridge so it can wire Bonzo into Ender, and (2) make Ender aware of Bonzo so a `require('bonzo')` will do the right thing because this is how the bridge fetches Bonzo.
 
-Let's first do this the easy way. With an Ender build containing just Qwery and Bean and Bonzo's bridge in a separate file named *bonzo-ender-bridge.js* we can do the following:
+Let's first do this the easy way. With an Ender build that just contains Qwery and Bean and Bonzo's bridge in a separate file named *bonzo-ender-bridge.js*, we can do the following:
 
 ```html
 <!-- the order of the first two doesn't matter -->
@@ -173,7 +173,7 @@ Let's first do this the easy way. With an Ender build containing just Qwery and 
 <script src="bonzo-ender-bridge.js"></script>
 ```
 
-If you look at the diagram of the Ender file structure above you'll see that we're replicating it with our `<script>` tags but replacing `provide('bonzo', module.exports)` with `provide('bonzo', bonzo)` as Bonzo has detected that it's not operating inside of a CommonJS environment with `module.exports` available so it's attached itself to the global (`window`) object instead. Both `provide()` and `require()` are available on the global object and can be used outside of Ender (for example, to extract Bean out of an integrated build you could simply `var bean = require('bean')`.)
+If you look at the diagram of the Ender file structure above you'll see that we're replicating it with our `<script>` tags but replacing `provide('bonzo', module.exports)` with `provide('bonzo', bonzo)` as Bonzo has detected that it's not operating inside of a CommonJS environment with `module.exports` available. Instead, it's attached itself to the global (`window`) object. Both `provide()` and `require()` are available on the global object and can be used outside of Ender (for example, to extract Bean out of an integrated build you could simply `var bean = require('bean')`.)
 
 We can now continue to use exactly the same script as in our fully integrated Ender build example:
 
@@ -214,7 +214,7 @@ First we make a new directory to contain our package. We'll include the Bonzo br
 
 We then point the Ender CLI to this directory: `ender build qwery bean ./fake-bonzo/` (or we could run `ender add ./fake-bonzo/` to add it to the ender.js created in the above example).
 
-Our complete page then looks like this:
+The completed page now looks like this:
 
 ```html
 <!DOCTYPE HTML>
