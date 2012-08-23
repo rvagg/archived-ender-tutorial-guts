@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Example 1</title>
+</head>
+<body>
+
+  <!-- the order of the first two doesn't matter -->
+  <script src="ender.js"></script>
+  <script src="bonzo.js"></script>
+  <script>
+    provide('bonzo', bonzo)
+  </script>
+  <script src="bonzo-ender-bridge.js"></script>
+
+  <script id="scr">
+    $('<pre>')
+      .text($('#scr').text())
+      .css({
+        fontWeight: 'bold',
+        border: 'solid 1px red',
+        margin: 10,
+        padding: 10
+      })
+      .bind('click', function () {
+        alert('Clickety clack');
+      })
+      .appendTo('body');
+
+  </script>
+</body>
+</html>

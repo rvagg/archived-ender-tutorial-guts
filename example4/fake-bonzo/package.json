@@ -1,0 +1,7 @@
+{
+  "name": "fake-bonzo",
+  "version": "0.0.0",
+  "description": "Fake Bonzo",
+  "main": "main.js",
+  "ender": "bonzo-ender-bridge.js"
+}

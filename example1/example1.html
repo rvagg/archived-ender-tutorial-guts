@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Example 1</title>
+</head>
+<body>
+  <script src="bonzo.js"></script>
+  <script id="scr">
+    // the contents of *this* script,
+    var scr = document.getElementById('scr').innerHTML
+
+    // create a <pre></pre>
+    var pre = bonzo.create('<pre>')
+
+    // fill it with the script text, append it to body and style it
+    bonzo(pre)
+      .text(scr)
+      .css({
+        fontWeight: 'bold',
+        border: 'solid 1px red',
+        margin: 10,
+        padding: 10
+      })
+      .appendTo(document.body);
+
+  </script>
+</body>
+</html>
