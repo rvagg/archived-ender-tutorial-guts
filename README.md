@@ -221,7 +221,7 @@ Our complete page then looks like this:
 <html lang="en-us">
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <title>Example 1</title>
+  <title>Example 4</title>
 </head>
 <body>
   <script src="bonzo.js"></script>
