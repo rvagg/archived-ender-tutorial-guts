@@ -1,6 +1,10 @@
 # How Ender bundles libraries for the browser
 ***By [Rod Vagg](https://twitter.com/rvagg)</a>***
 
+***This repository contains examples from an article was published on [DailyJS.com](http://dailyjs.com/2012/08/23/ender-tutorial/)***
+
+-----------------------------------------------
+
 I was asked an interesting Ender question on IRC (#enderjs on Freenode) and as I was answering it, it occurred to me that the subject would be an ideal way to explain how Ender's multi-library bundling works. So here is that explanation!
 
 The original question went something like this:
